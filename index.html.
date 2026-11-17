@@ -3,70 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGGLORADIO - En direct</title>
+
+<title>AGGLORADIO - Radio en direct</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#101426,#202c48);
+  background: linear-gradient(135deg,#080d19,#172c4b,#101522);
   color: white;
   text-align: center;
 }
 
 header {
-  padding: 35px 15px;
+  padding: 40px 15px;
   background: #080d19;
 }
 
 header h1 {
   color: #ffca28;
-  font-size: 42px;
-  letter-spacing: 4px;
+  font-size: 45px;
+  letter-spacing: 5px;
   margin: 0;
 }
 
-header p { color: #bbb; }
-
-main { padding: 45px 15px; }
-
-.player {
-  max-width: 480px;
-  margin: 25px auto;
-  padding: 30px 20px;
-  background: #26344e;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px #0006;
+header p {
+  color: #ccc;
+  font-size: 17px;
 }
 
-.onair {
+main {
+  padding: 45px 15px;
+}
+
+.player {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 35px 25px;
+  border-radius: 22px;
+  background: #23344f;
+  box-shadow: 0 10px 35px #0008;
+}
+
+.live {
   color: #ff5555;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .play {
-  display: inline-block;
   background: #ffca28;
-  color: #101426;
+  color: #111;
   border: none;
-  border-radius: 30px;
-  padding: 15px 35px;
+  padding: 16px 30px;
+  border-radius: 40px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  margin: 15px;
+  margin: 20px 0;
 }
 
-.play:hover { background: white; }
+.play:hover {
+  background: white;
+}
 
-audio { width: 100%; }
+audio {
+  width: 100%;
+}
 
 #status {
-  color: #ccc;
+  color: #ddd;
   font-size: 14px;
+  margin-top: 18px;
 }
 
 footer {
@@ -74,6 +86,7 @@ footer {
   background: #080d19;
   color: #aaa;
 }
+
 </style>
 </head>
 
@@ -81,28 +94,34 @@ footer {
 
 <header>
   <h1>AGGLORADIO</h1>
-  <p>La radio qui vous accompagne partout !</p>
+  <p>Votre radio, votre musique, votre région !</p>
 </header>
 
 <main>
+
   <h2>Bienvenue sur AGGLORADIO</h2>
-  <p>Retrouvez votre radio sur internet, où que vous soyez.</p>
+  <p>La radio qui vous accompagne partout dans le monde.</p>
 
   <div class="player">
-    <p class="onair">● AGGLORADIO EN DIRECT</p>
-    <h2>ÉCOUTEZ-NOUS !</h2>
+
+    <p class="live">● EN DIRECT</p>
+
+    <h2>ÉCOUTEZ AGGLORADIO</h2>
 
     <button class="play" id="playButton">
       ▶ ÉCOUTER EN DIRECT
     </button>
 
     <audio id="radio" controls preload="none">
-      <source src="http://82.145.41.8:20916/;" type="audio/mpeg">
-      Votre navigateur ne prend pas en charge ce lecteur.
+      <source
+        src="https://uk21freenew.listen2myradio.com/live.mp3?typeportmount=s1_20916_stream_579992880"
+        type="audio/mpeg">
     </audio>
 
-    <p id="status">Prêt à écouter AGGLORADIO</p>
+    <p id="status">AGGLORADIO est prête à vous accueillir.</p>
+
   </div>
+
 </main>
 
 <footer>
@@ -110,35 +129,46 @@ footer {
 </footer>
 
 <script>
+
 const radio = document.getElementById("radio");
 const button = document.getElementById("playButton");
 const status = document.getElementById("status");
 
 button.addEventListener("click", async () => {
+
   if (radio.paused) {
-    status.textContent = "Connexion à la radio...";
+
+    status.textContent = "Connexion à AGGLORADIO...";
+
     try {
       await radio.play();
-      button.textContent = "❚❚ PAUSE";
-      status.textContent = "Lecture en cours";
+      button.textContent = "❚❚ METTRE EN PAUSE";
     } catch (error) {
-      status.textContent =
-        "Impossible de démarrer. Vérifiez le flux radio.";
+      status.textContent = "Impossible de lire le flux. Réessayez.";
     }
+
   } else {
+
     radio.pause();
     button.textContent = "▶ ÉCOUTER EN DIRECT";
-    status.textContent = "Lecture en pause";
+    status.textContent = "Lecture en pause.";
+
   }
+
 });
 
 radio.addEventListener("playing", () => {
-  status.textContent = "Vous écoutez AGGLORADIO !";
+  status.textContent = "Vous écoutez AGGLORADIO en direct !";
 });
 
 radio.addEventListener("error", () => {
-  status.textContent = "Erreur de connexion au flux radio.";
+  status.textContent = "Erreur de connexion au flux audio.";
 });
+
+radio.addEventListener("pause", () => {
+  button.textContent = "▶ ÉCOUTER EN DIRECT";
+});
+
 </script>
 
 </body>
