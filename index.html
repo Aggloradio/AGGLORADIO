@@ -13,7 +13,6 @@
   --yellow: #ffca28;
   --blue: #168cff;
   --dark: #080d19;
-  --panel: #111c30;
   --white: #ffffff;
   --muted: #aab5c8;
 }
@@ -150,7 +149,7 @@ nav a:hover {
   margin: 27px auto 0;
 }
 
-/* LECTEUR */
+/* LECTEUR RADIO */
 
 .radio-section {
   padding: 30px 18px 85px;
@@ -237,11 +236,15 @@ nav a:hover {
 }
 
 @keyframes sound {
-  0% { transform: scaleY(.35); }
-  100% { transform: scaleY(5); }
+  0% {
+    transform: scaleY(.35);
+  }
+  100% {
+    transform: scaleY(5);
+  }
 }
 
-/* BOUTON */
+/* BOUTON LECTURE */
 
 .play {
   display: inline-flex;
@@ -283,11 +286,12 @@ audio {
   min-height: 18px;
 }
 
-/* INFORMATIONS */
+/* CONTACT */
 
-.features {
-  padding: 65px 20px;
-  background: #0d1728;
+.contact {
+  text-align: center;
+  padding: 75px 20px;
+  background: radial-gradient(circle at center,#172d4d,#080d19 75%);
 }
 
 .container {
@@ -296,57 +300,12 @@ audio {
 }
 
 .section-title {
-  text-align: center;
   font-size: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .section-title span {
   color: var(--yellow);
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 22px;
-}
-
-.feature {
-  background: #15243b;
-  border: 1px solid #ffffff12;
-  border-radius: 17px;
-  padding: 30px 20px;
-  text-align: center;
-  transition: .25s;
-}
-
-.feature:hover {
-  transform: translateY(-5px);
-  border-color: #ffca2870;
-}
-
-.feature-icon {
-  font-size: 35px;
-  margin-bottom: 17px;
-}
-
-.feature h3 {
-  color: var(--yellow);
-  margin-bottom: 12px;
-}
-
-.feature p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-/* CONTACT */
-
-.contact {
-  text-align: center;
-  padding: 75px 20px;
-  background: radial-gradient(circle at center,#172d4d,#080d19 75%);
 }
 
 .contact p {
@@ -388,9 +347,10 @@ footer {
   letter-spacing: 2px;
 }
 
-/* MOBILE */
+/* VERSION MOBILE */
 
 @media(max-width:750px) {
+
   .navbar {
     flex-direction: column;
   }
@@ -399,10 +359,6 @@ footer {
     justify-content: center;
     flex-wrap: wrap;
     gap: 17px;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr;
   }
 
   .hero {
@@ -416,9 +372,11 @@ footer {
   .player h2 {
     font-size: 23px;
   }
+
 }
 
 @media(max-width:380px) {
+
   .brand-name {
     font-size: 20px;
   }
@@ -435,6 +393,7 @@ footer {
     padding: 15px 20px;
     font-size: 13px;
   }
+
 }
 </style>
 </head>
@@ -454,7 +413,6 @@ footer {
     <nav>
       <a href="#accueil">Accueil</a>
       <a href="#direct">Écouter</a>
-      <a href="#radio">La radio</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -500,6 +458,7 @@ footer {
     <!-- EQUALIZER -->
 
     <div class="equalizer" id="equalizer" aria-hidden="true">
+
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
@@ -517,6 +476,7 @@ footer {
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
+
     </div>
 
     <button class="play" id="playButton" type="button">
@@ -524,60 +484,18 @@ footer {
     </button>
 
     <audio id="radio" controls preload="none">
+
       <source
         src="https://uk21freenew.listen2myradio.com/live.mp3?typeportmount=s1_20916_stream_579992880"
         type="audio/mpeg">
+
       Votre navigateur ne prend pas en charge le lecteur audio.
+
     </audio>
 
     <p id="status" aria-live="polite">
       AGGLORADIO est prête à vous accueillir.
     </p>
-
-  </div>
-
-</section>
-
-<!-- PRESENTATION -->
-
-<section class="features" id="radio">
-
-  <div class="container">
-
-    <h2 class="section-title">
-      L'univers <span>AGGLORADIO</span>
-    </h2>
-
-    <div class="feature-grid">
-
-      <div class="feature">
-        <div class="feature-icon">🎵</div>
-        <h3>Votre musique</h3>
-        <p>
-          Retrouvez votre radio et profitez de la musique
-          où que vous soyez.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🌍</div>
-        <h3>Partout dans le monde</h3>
-        <p>
-          AGGLORADIO vous accompagne sur ordinateur,
-          tablette et smartphone.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🎙️</div>
-        <h3>La passion de la radio</h3>
-        <p>
-          Une radio proche de ses auditeurs et ouverte
-          sur le monde.
-        </p>
-      </div>
-
-    </div>
 
   </div>
 
@@ -616,9 +534,12 @@ footer {
   © 2026 AGGLORADIO - Tous droits réservés.
 
   <br>
+
   Votre radio, votre musique, votre région !
 
 </footer>
+
+<!-- JAVASCRIPT -->
 
 <script>
 
@@ -627,15 +548,17 @@ const button = document.getElementById("playButton");
 const status = document.getElementById("status");
 const equalizer = document.getElementById("equalizer");
 
+/* Le bouton garde toujours le même texte */
+
 function updatePlayer(playing) {
-  if (playing) {
-    button.textContent = "❚❚ METTRE EN PAUSE";
-    equalizer.classList.add("active");
-  } else {
-    button.textContent = "▶ ÉCOUTER EN DIRECT";
-    equalizer.classList.remove("active");
-  }
+
+  button.textContent = "▶ ÉCOUTER EN DIRECT";
+
+  equalizer.classList.toggle("active", playing);
+
 }
+
+/* Commande lecture / pause */
 
 button.addEventListener("click", async () => {
 
@@ -644,43 +567,64 @@ button.addEventListener("click", async () => {
     status.textContent = "Connexion à AGGLORADIO...";
 
     try {
+
       await radio.play();
+
     } catch (error) {
+
       status.textContent =
         "Impossible de lire le flux. Réessayez.";
+
       updatePlayer(false);
+
     }
 
   } else {
 
     radio.pause();
+
     status.textContent = "Lecture en pause.";
 
   }
 
 });
 
+/* Événements audio */
+
 radio.addEventListener("playing", () => {
+
   status.textContent = "Lecture en cours.";
+
   updatePlayer(true);
+
 });
 
 radio.addEventListener("pause", () => {
+
   updatePlayer(false);
+
 });
 
 radio.addEventListener("waiting", () => {
+
   status.textContent = "Chargement du flux audio...";
+
 });
 
 radio.addEventListener("error", () => {
+
   status.textContent = "Erreur de connexion au flux audio.";
+
   updatePlayer(false);
+
 });
 
 radio.addEventListener("ended", () => {
+
   status.textContent = "Le flux audio est terminé.";
+
   updatePlayer(false);
+
 });
 
 </script>
