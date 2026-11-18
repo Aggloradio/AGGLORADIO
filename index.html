@@ -6,14 +6,15 @@
 
 <title>AGGLORADIO | La radio en direct</title>
 <meta name="description" content="AGGLORADIO, votre radio, votre musique, votre région. Écoutez-nous en direct partout dans le monde.">
-<meta name="theme-color" content="#080d19">
+<meta name="theme-color" content="#080b18">
 
 <style>
 :root {
-  --yellow: #ffca28;
+  --gold: #ffc928;
   --blue: #168cff;
-  --dark: #080d19;
-  --white: #ffffff;
+  --purple: #9b5cff;
+  --dark: #080b18;
+  --white: #fff;
   --muted: #aab5c8;
 }
 
@@ -23,9 +24,7 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -35,21 +34,19 @@ body {
   overflow-x: hidden;
 }
 
-/* NAVIGATION */
-
 header {
-  background: rgba(8,13,25,.96);
+  background: rgba(8,11,24,.94);
   border-bottom: 1px solid #ffffff15;
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px);
 }
 
 .navbar {
   max-width: 1150px;
   margin: auto;
-  padding: 17px 22px;
+  padding: 15px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -64,17 +61,19 @@ header {
 }
 
 .logo-icon {
-  width: 43px;
-  height: 43px;
-  border-radius: 12px;
-  background: linear-gradient(135deg,var(--yellow),#ff8c00);
+  width: 49px;
+  height: 49px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,var(--blue),var(--purple));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #101522;
-  font-size: 25px;
-  font-weight: bold;
-  box-shadow: 0 0 22px #ffca2840;
+  box-shadow: 0 0 25px #168cff55;
+}
+
+.logo-icon svg {
+  width: 35px;
+  height: 35px;
 }
 
 .brand-name {
@@ -84,9 +83,7 @@ header {
   color: white;
 }
 
-.brand-name span {
-  color: var(--yellow);
-}
+.brand-name span { color: var(--gold); }
 
 nav {
   display: flex;
@@ -100,70 +97,152 @@ nav a {
   transition: .2s;
 }
 
-nav a:hover {
-  color: var(--yellow);
-}
+nav a:hover { color: var(--gold); }
 
 /* ACCUEIL */
 
 .hero {
   text-align: center;
-  padding: 85px 20px 45px;
+  padding: 75px 20px 45px;
   background:
-    radial-gradient(ellipse at 50% 10%,#173c69 0%,#0b192e 45%,#080d19 80%);
+    radial-gradient(ellipse at 50% 10%,#263b76 0%,#101a38 45%,#080b18 85%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: #168cff20;
+  filter: blur(100px);
+  border-radius: 50%;
+  top: 0;
+  left: -150px;
 }
 
 .hero-label {
   display: inline-block;
   padding: 9px 17px;
-  border: 1px solid #ffca2850;
+  border: 1px solid #ffc92860;
   border-radius: 30px;
-  color: var(--yellow);
+  color: var(--gold);
   font-size: 12px;
   letter-spacing: 3px;
   margin-bottom: 25px;
 }
 
+.hero-logo {
+  width: 95px;
+  height: 95px;
+  margin: 0 auto 20px;
+  border-radius: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#168cff,#8c48ff);
+  box-shadow: 0 0 45px #168cff60;
+  animation: logoGlow 3s infinite alternate;
+}
+
+.hero-logo svg {
+  width: 70px;
+  height: 70px;
+}
+
+@keyframes logoGlow {
+  from { box-shadow: 0 0 20px #168cff40; }
+  to { box-shadow: 0 0 50px #9b5cff90; }
+}
+
 .hero h1 {
-  font-size: clamp(42px,8vw,76px);
+  font-size: clamp(39px,8vw,76px);
   font-weight: 900;
   letter-spacing: 5px;
   margin-bottom: 15px;
 }
 
-.hero h1 span {
-  color: var(--yellow);
-}
+.hero h1 span { color: var(--gold); }
 
 .hero p {
   color: var(--muted);
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .hero-line {
-  width: 75px;
+  width: 90px;
   height: 4px;
-  background: var(--yellow);
+  background: linear-gradient(90deg,var(--blue),var(--purple),var(--gold));
   border-radius: 5px;
   margin: 27px auto 0;
 }
 
-/* LECTEUR RADIO */
+/* HORLOGE */
+
+.clock-section {
+  padding: 20px;
+  text-align: center;
+  background: #0b1021;
+}
+
+.clock-label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 9px;
+}
+
+.clock {
+  font-size: clamp(35px,7vw,53px);
+  font-weight: 900;
+  letter-spacing: 5px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(90deg,#168cff,#b18aff,var(--gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.clock-date {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* LECTEUR */
 
 .radio-section {
-  padding: 30px 18px 85px;
+  padding: 45px 18px 85px;
+  background:
+    radial-gradient(ellipse at center,#101c38 0%,#080b18 75%);
 }
 
 .player {
-  max-width: 620px;
+  max-width: 650px;
   margin: auto;
   padding: 38px 30px;
-  background: linear-gradient(145deg,#172945,#10192a);
-  border: 1px solid #ffffff18;
-  border-radius: 25px;
-  box-shadow: 0 20px 65px #0008;
+  background: linear-gradient(145deg,#192847,#101629);
+  border: 1px solid #ffffff20;
+  border-radius: 27px;
+  box-shadow: 0 20px 65px #0009;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.player::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #168cff15;
+  filter: blur(60px);
+  top: -120px;
+  right: -80px;
+  pointer-events: none;
 }
 
 .live {
@@ -185,6 +264,14 @@ nav a:hover {
   box-shadow: 0 0 12px #ff4545;
 }
 
+.live.playing .live-dot {
+  animation: livePulse 1s infinite;
+}
+
+@keyframes livePulse {
+  50% { opacity: .3; transform: scale(.7); }
+}
+
 .player h2 {
   font-size: 27px;
   margin-bottom: 9px;
@@ -193,66 +280,63 @@ nav a:hover {
 .player-subtitle {
   color: var(--muted);
   font-size: 14px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 /* EQUALIZER */
 
 .equalizer {
-  height: 95px;
+  height: 115px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  margin: 15px auto 30px;
+  margin: 15px auto 28px;
 }
 
 .bar {
-  width: 7px;
+  width: 8px;
   height: 12px;
-  background: linear-gradient(to top,var(--blue),var(--yellow));
   border-radius: 8px;
   transform-origin: center;
+  background: linear-gradient(to top,#168cff,#9b5cff,#ffc928);
+  box-shadow: 0 0 10px #168cff35;
 }
 
 .equalizer.active .bar {
-  animation: sound 0.75s ease-in-out infinite alternate;
+  animation: sound .65s ease-in-out infinite alternate;
 }
 
 .equalizer.active .bar:nth-child(2n) {
-  animation-duration: .55s;
+  animation-duration: .48s;
 }
-
 .equalizer.active .bar:nth-child(3n) {
-  animation-duration: .9s;
+  animation-duration: .85s;
 }
-
 .equalizer.active .bar:nth-child(4n) {
-  animation-duration: .65s;
+  animation-duration: .58s;
 }
-
 .equalizer.active .bar:nth-child(5n) {
-  animation-duration: 1.05s;
+  animation-duration: 1s;
+}
+.equalizer.active .bar:nth-child(7n) {
+  animation-duration: .4s;
 }
 
 @keyframes sound {
-  0% {
-    transform: scaleY(.35);
-  }
-  100% {
-    transform: scaleY(5);
-  }
+  0% { transform: scaleY(.35); }
+  100% { transform: scaleY(5.5); }
 }
 
-/* BOUTON LECTURE */
+/* LECTEUR */
 
 .play {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(135deg,var(--yellow),#ff9d00);
-  color: #101522;
+  background: linear-gradient(135deg,var(--blue),var(--purple));
+  color: white;
   border: none;
   border-radius: 50px;
   padding: 17px 30px;
@@ -260,16 +344,21 @@ nav a:hover {
   font-weight: 900;
   cursor: pointer;
   transition: .25s;
-  box-shadow: 0 8px 25px #ffca2830;
+  box-shadow: 0 8px 28px #168cff40;
 }
 
 .play:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px #ffca2855;
+  box-shadow: 0 12px 35px #168cff70;
 }
 
-.play:active {
-  transform: scale(.97);
+.play:active { transform: scale(.97); }
+
+.play:focus-visible,
+nav a:focus-visible,
+.contact a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
 }
 
 audio {
@@ -291,7 +380,7 @@ audio {
 .contact {
   text-align: center;
   padding: 75px 20px;
-  background: radial-gradient(circle at center,#172d4d,#080d19 75%);
+  background: radial-gradient(circle at center,#192d52,#080b18 75%);
 }
 
 .container {
@@ -304,9 +393,7 @@ audio {
   margin-bottom: 25px;
 }
 
-.section-title span {
-  color: var(--yellow);
-}
+.section-title span { color: var(--gold); }
 
 .contact p {
   color: var(--muted);
@@ -315,24 +402,24 @@ audio {
 
 .contact a {
   display: inline-block;
-  color: var(--yellow);
+  color: var(--gold);
   text-decoration: none;
   font-size: 17px;
   padding: 14px 23px;
-  border: 1px solid #ffca2860;
+  border: 1px solid #ffc92870;
   border-radius: 35px;
   transition: .2s;
 }
 
 .contact a:hover {
-  background: var(--yellow);
+  background: var(--gold);
   color: #111;
 }
 
 /* FOOTER */
 
 footer {
-  background: #060a12;
+  background: #060913;
   border-top: 1px solid #ffffff15;
   padding: 28px 15px;
   text-align: center;
@@ -342,15 +429,15 @@ footer {
 }
 
 .footer-brand {
-  color: var(--yellow);
+  color: var(--gold);
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-size: 17px;
 }
 
-/* VERSION MOBILE */
+/* MOBILE */
 
 @media(max-width:750px) {
-
   .navbar {
     flex-direction: column;
   }
@@ -361,39 +448,37 @@ footer {
     gap: 17px;
   }
 
-  .hero {
-    padding-top: 65px;
-  }
+  .hero { padding-top: 55px; }
 
-  .player {
-    padding: 30px 19px;
-  }
+  .player { padding: 30px 19px; }
 
-  .player h2 {
-    font-size: 23px;
-  }
-
+  .player h2 { font-size: 23px; }
 }
 
 @media(max-width:380px) {
+  .brand-name { font-size: 19px; }
 
-  .brand-name {
-    font-size: 20px;
-  }
+  nav { gap: 12px; }
 
-  nav {
-    gap: 12px;
-  }
-
-  nav a {
-    font-size: 12px;
-  }
+  nav a { font-size: 12px; }
 
   .play {
     padding: 15px 20px;
     font-size: 13px;
   }
 
+  .equalizer { gap: 5px; }
+}
+
+/* ACCESSIBILITÉ */
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
@@ -405,14 +490,28 @@ footer {
 <header>
   <div class="navbar">
 
-    <a href="#accueil" class="brand">
-      <div class="logo-icon">A</div>
+    <a href="#accueil" class="brand" aria-label="AGGLORADIO - Accueil">
+
+      <div class="logo-icon">
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke="white" stroke-width="4"
+             stroke-linecap="round">
+          <path d="M12 26V38"/>
+          <path d="M22 17V47"/>
+          <path d="M32 8V56"/>
+          <path d="M42 17V47"/>
+          <path d="M52 26V38"/>
+        </svg>
+      </div>
+
       <div class="brand-name">AGGLO<span>RADIO</span></div>
+
     </a>
 
     <nav>
       <a href="#accueil">Accueil</a>
       <a href="#direct">Écouter</a>
+      <a href="#horloge">Horloge</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -427,6 +526,19 @@ footer {
 
   <div class="hero-label">RADIO WEB • EN DIRECT</div>
 
+  <div class="hero-logo" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none"
+         stroke="white" stroke-width="5"
+         stroke-linecap="round">
+      <path d="M14 39V61"/>
+      <path d="M29 25V75"/>
+      <path d="M44 12V88"/>
+      <path d="M59 25V75"/>
+      <path d="M74 39V61"/>
+      <path d="M89 44V56"/>
+    </svg>
+  </div>
+
   <h1>AGGLO<span>RADIO</span></h1>
 
   <p>
@@ -438,13 +550,29 @@ footer {
 
 </section>
 
+<!-- HORLOGE FRANÇAISE -->
+
+<section class="clock-section" id="horloge">
+
+  <div class="clock-label">HEURE OFFICIELLE FRANÇAISE</div>
+
+  <div class="clock" id="clock" aria-label="Heure française">
+    --:--:--
+  </div>
+
+  <div class="clock-date" id="clockDate">
+    Chargement de la date...
+  </div>
+
+</section>
+
 <!-- LECTEUR RADIO -->
 
 <section class="radio-section" id="direct">
 
   <div class="player">
 
-    <div class="live">
+    <div class="live" id="liveIndicator">
       <span class="live-dot"></span>
       EN DIRECT
     </div>
@@ -480,8 +608,11 @@ footer {
     </div>
 
     <button class="play" id="playButton" type="button">
-      ▶ ÉCOUTER EN DIRECT
+      <span id="buttonIcon">▶</span>
+      <span id="buttonText">ÉCOUTER EN DIRECT</span>
     </button>
+
+    <!-- FLUX AUDIO ORIGINAL CONSERVÉ -->
 
     <audio id="radio" controls preload="none">
 
@@ -545,20 +676,64 @@ footer {
 
 const radio = document.getElementById("radio");
 const button = document.getElementById("playButton");
+const buttonIcon = document.getElementById("buttonIcon");
+const buttonText = document.getElementById("buttonText");
 const status = document.getElementById("status");
 const equalizer = document.getElementById("equalizer");
+const liveIndicator = document.getElementById("liveIndicator");
 
-/* Le bouton garde toujours le même texte */
+/* HORLOGE FRANÇAISE */
 
-function updatePlayer(playing) {
+const clock = document.getElementById("clock");
+const clockDate = document.getElementById("clockDate");
 
-  button.textContent = "▶ ÉCOUTER EN DIRECT";
+const timeFormatter = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: "Europe/Paris",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false
+});
 
-  equalizer.classList.toggle("active", playing);
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: "Europe/Paris",
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+});
+
+function updateClock() {
+
+  const now = new Date();
+
+  clock.textContent = timeFormatter.format(now);
+  clockDate.textContent = dateFormatter.format(now);
 
 }
 
-/* Commande lecture / pause */
+updateClock();
+
+setInterval(updateClock, 1000);
+
+
+/* ÉTAT DU LECTEUR */
+
+function updatePlayer(playing) {
+
+  equalizer.classList.toggle("active", playing);
+  liveIndicator.classList.toggle("playing", playing);
+
+  buttonIcon.textContent = playing ? "Ⅱ" : "▶";
+
+  buttonText.textContent = playing
+    ? "METTRE EN PAUSE"
+    : "ÉCOUTER EN DIRECT";
+
+}
+
+
+/* COMMANDE LECTURE / PAUSE */
 
 button.addEventListener("click", async () => {
 
@@ -573,7 +748,7 @@ button.addEventListener("click", async () => {
     } catch (error) {
 
       status.textContent =
-        "Impossible de lire le flux. Réessayez.";
+        "Impossible de lire le flux. Vérifiez votre connexion et réessayez.";
 
       updatePlayer(false);
 
@@ -589,11 +764,12 @@ button.addEventListener("click", async () => {
 
 });
 
-/* Événements audio */
+
+/* ÉVÉNEMENTS AUDIO */
 
 radio.addEventListener("playing", () => {
 
-  status.textContent = "Lecture en cours.";
+  status.textContent = "AGGLORADIO est en cours de lecture.";
 
   updatePlayer(true);
 
@@ -613,7 +789,8 @@ radio.addEventListener("waiting", () => {
 
 radio.addEventListener("error", () => {
 
-  status.textContent = "Erreur de connexion au flux audio.";
+  status.textContent =
+    "Erreur de connexion au flux audio. Veuillez réessayer.";
 
   updatePlayer(false);
 
