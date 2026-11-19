@@ -10,7 +10,6 @@
 <meta name="theme-color" content="#080b18">
 
 <style>
-
 :root {
   --gold:#ffc928;
   --blue:#168cff;
@@ -157,12 +156,8 @@ nav a:hover {
 }
 
 @keyframes logoGlow {
-  from {
-    box-shadow:0 0 20px #168cff40;
-  }
-  to {
-    box-shadow:0 0 50px #9b5cff90;
-  }
+  from { box-shadow:0 0 20px #168cff40; }
+  to { box-shadow:0 0 50px #9b5cff90; }
 }
 
 .hero h1 {
@@ -269,7 +264,6 @@ nav a:hover {
   width:8px;
   height:12px;
   border-radius:8px;
-  transform-origin:center;
   background:linear-gradient(to top,#168cff,#9b5cff,#ffc928);
   box-shadow:0 0 10px #168cff35;
 }
@@ -286,20 +280,12 @@ nav a:hover {
   animation-duration:.85s;
 }
 
-.equalizer.active .bar:nth-child(4n) {
-  animation-duration:.58s;
-}
-
-.equalizer.active .bar:nth-child(5n) {
-  animation-duration:1s;
-}
-
 @keyframes sound {
   0% { transform:scaleY(.35); }
   100% { transform:scaleY(5.5); }
 }
 
-/* BOUTON */
+/* BOUTON RADIO */
 
 .play {
   display:inline-flex;
@@ -314,6 +300,7 @@ nav a:hover {
   font-size:15px;
   font-weight:900;
   cursor:pointer;
+  text-decoration:none;
   transition:.25s;
   box-shadow:0 8px 28px #168cff40;
 }
@@ -332,13 +319,6 @@ nav a:focus-visible,
 .contact a:focus-visible {
   outline:2px solid var(--gold);
   outline-offset:4px;
-}
-
-audio {
-  display:block;
-  width:100%;
-  margin-top:28px;
-  height:42px;
 }
 
 #status {
@@ -418,7 +398,6 @@ footer {
 /* MOBILE */
 
 @media(max-width:750px) {
-
   .navbar {
     flex-direction:column;
   }
@@ -444,11 +423,9 @@ footer {
   body {
     background-attachment:scroll;
   }
-
 }
 
 @media(max-width:380px) {
-
   .brand-name {
     font-size:19px;
   }
@@ -469,13 +446,11 @@ footer {
   .equalizer {
     gap:5px;
   }
-
 }
 
-/* ACCESSIBILITÉ */
+/* ACCESSIBILITE */
 
 @media(prefers-reduced-motion:reduce) {
-
   *,
   *::before,
   *::after {
@@ -484,9 +459,7 @@ footer {
     scroll-behavior:auto!important;
     transition-duration:.01ms!important;
   }
-
 }
-
 </style>
 </head>
 
@@ -495,27 +468,22 @@ footer {
 <!-- NAVIGATION -->
 
 <header>
-
   <div class="navbar">
 
     <a href="#accueil" class="brand" aria-label="AGGLORADIO - Accueil">
 
       <div class="logo-icon">
-
         <svg viewBox="0 0 64 64"
              fill="none"
              stroke="white"
              stroke-width="4"
              stroke-linecap="round">
-
           <path d="M12 26V38"/>
           <path d="M22 17V47"/>
           <path d="M32 8V56"/>
           <path d="M42 17V47"/>
           <path d="M52 26V38"/>
-
         </svg>
-
       </div>
 
       <div class="brand-name">AGGLO<span>RADIO</span></div>
@@ -530,7 +498,6 @@ footer {
     </nav>
 
   </div>
-
 </header>
 
 <main>
@@ -542,22 +509,18 @@ footer {
   <div class="hero-label">RADIO WEB</div>
 
   <div class="hero-logo" aria-hidden="true">
-
     <svg viewBox="0 0 100 100"
          fill="none"
          stroke="white"
          stroke-width="5"
          stroke-linecap="round">
-
       <path d="M14 39V61"/>
       <path d="M29 25V75"/>
       <path d="M44 12V88"/>
       <path d="M59 25V75"/>
       <path d="M74 39V61"/>
       <path d="M89 44V56"/>
-
     </svg>
-
   </div>
 
   <h1>AGGLO<span>RADIO</span></h1>
@@ -621,31 +584,28 @@ footer {
 
     </div>
 
-    <!-- BOUTON LECTURE -->
+    <!-- OUVERTURE DU LECTEUR OFFICIEL -->
 
-    <button class="play" id="playButton" type="button">
+    <a
+      class="play"
+      id="playButton"
+      href="https://aggloradio.radio12345.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Écouter AGGLORADIO sur sa page officielle"
+    >
 
-      <span id="buttonIcon">▶</span>
+      <span aria-hidden="true">▶</span>
+      <span>ÉCOUTER EN DIRECT</span>
 
-      <span id="buttonText">ÉCOUTER EN DIRECT</span>
-
-    </button>
-
-    <!-- LECTEUR AUDIO CORRIGÉ -->
-
-    <audio id="radio" controls preload="none" playsinline>
-
-      <source
-        src="https://uk21freenew.listen2myradio.com/live.mp3?typeportmount=s1_20916_stream_579992880"
-        type="audio/mpeg"
-      >
-
-      Votre navigateur ne prend pas en charge le lecteur audio.
-
-    </audio>
+    </a>
 
     <p id="status" aria-live="polite" role="status">
-      AGGLORADIO est prête à vous accueillir.
+      Cliquez pour écouter AGGLORADIO gratuitement sur notre page officielle.
+    </p>
+
+    <p style="color:#8290a5;font-size:12px;margin-top:12px;">
+      Le lecteur officiel s'ouvrira dans un nouvel onglet.
     </p>
 
   </div>
@@ -693,102 +653,6 @@ footer {
 <!-- JAVASCRIPT -->
 
 <script>
-
-/* ELEMENTS DU LECTEUR */
-
-const radio = document.getElementById("radio");
-const button = document.getElementById("playButton");
-const buttonIcon = document.getElementById("buttonIcon");
-const buttonText = document.getElementById("buttonText");
-const status = document.getElementById("status");
-const equalizer = document.getElementById("equalizer");
-
-/* MISE À JOUR DU LECTEUR */
-
-function updatePlayer(playing) {
-
-  equalizer.classList.toggle("active",playing);
-
-  buttonIcon.textContent = playing ? "Ⅱ" : "▶";
-
-  buttonText.textContent = playing
-    ? "METTRE EN PAUSE"
-    : "ÉCOUTER EN DIRECT";
-
-}
-
-/* COMMANDE LECTURE / PAUSE */
-
-button.addEventListener("click",async () => {
-
-  if (radio.paused) {
-
-    status.textContent = "Connexion à AGGLORADIO...";
-
-    try {
-
-      await radio.play();
-
-    } catch (error) {
-
-      status.textContent =
-        "Impossible de lire le flux. Vérifiez votre connexion et réessayez.";
-
-      updatePlayer(false);
-
-    }
-
-  } else {
-
-    radio.pause();
-
-    status.textContent = "Lecture en pause.";
-
-  }
-
-});
-
-/* EVENEMENTS AUDIO */
-
-radio.addEventListener("playing",() => {
-
-  status.textContent =
-    "AGGLORADIO est en cours de lecture.";
-
-  updatePlayer(true);
-
-});
-
-radio.addEventListener("pause",() => {
-
-  updatePlayer(false);
-
-});
-
-radio.addEventListener("waiting",() => {
-
-  status.textContent =
-    "Chargement du flux audio...";
-
-});
-
-radio.addEventListener("error",() => {
-
-  status.textContent =
-    "Erreur de connexion au flux audio. Veuillez réessayer.";
-
-  updatePlayer(false);
-
-});
-
-radio.addEventListener("ended",() => {
-
-  status.textContent =
-    "Le flux audio est terminé.";
-
-  updatePlayer(false);
-
-});
 
 /* HORLOGE FRANÇAISE */
 
