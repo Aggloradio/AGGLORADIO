@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AGGLORADIO | La radio en direct</title>
-<meta name="description" content="AGGLORADIO, votre radio, votre musique, votre région. Écoutez-nous en direct partout dans le monde.">
+<meta name="description" content="AGGLORADIO, votre radio, votre musique. Écoutez-nous en direct partout dans le monde.">
 <meta name="theme-color" content="#080b18">
 
 <style>
@@ -28,14 +28,17 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--dark);
+  background:
+    linear-gradient(rgba(8,11,24,.82),rgba(8,11,24,.88)),
+    url("https://commons.wikimedia.org/wiki/Special:Redirect/file/Radio%20FM%20Recording%20Studio%202026.jpg")
+    center center / cover fixed;
   color: var(--white);
   min-height: 100vh;
   overflow-x: hidden;
 }
 
 header {
-  background: rgba(8,11,24,.94);
+  background: rgba(8,11,24,.88);
   border-bottom: 1px solid #ffffff15;
   position: sticky;
   top: 0;
@@ -104,8 +107,12 @@ nav a:hover { color: var(--gold); }
 .hero {
   text-align: center;
   padding: 75px 20px 45px;
-  background:
-    radial-gradient(ellipse at 50% 10%,#263b76 0%,#101a38 45%,#080b18 85%);
+  background: radial-gradient(
+    ellipse at 50% 10%,
+    rgba(38,59,118,.55),
+    rgba(16,26,56,.35) 55%,
+    transparent 90%
+  );
   position: relative;
   overflow: hidden;
 }
@@ -184,14 +191,7 @@ nav a:hover { color: var(--gold); }
 .clock-section {
   padding: 20px;
   text-align: center;
-  background: #0b1021;
-}
-
-.clock-label {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 9px;
+  background: rgba(11,16,33,.65);
 }
 
 .clock {
@@ -211,19 +211,26 @@ nav a:hover { color: var(--gold); }
   margin-top: 8px;
 }
 
-/* LECTEUR */
+/* LECTEUR RADIO */
 
 .radio-section {
   padding: 45px 18px 85px;
-  background:
-    radial-gradient(ellipse at center,#101c38 0%,#080b18 75%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(16,28,56,.65),
+    transparent 75%
+  );
 }
 
 .player {
   max-width: 650px;
   margin: auto;
   padding: 38px 30px;
-  background: linear-gradient(145deg,#192847,#101629);
+  background: linear-gradient(
+    145deg,
+    rgba(25,40,71,.94),
+    rgba(16,22,41,.96)
+  );
   border: 1px solid #ffffff20;
   border-radius: 27px;
   box-shadow: 0 20px 65px #0009;
@@ -243,33 +250,6 @@ nav a:hover { color: var(--gold); }
   top: -120px;
   right: -80px;
   pointer-events: none;
-}
-
-.live {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: #ff5555;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 3px;
-  margin-bottom: 23px;
-}
-
-.live-dot {
-  width: 9px;
-  height: 9px;
-  background: #ff4545;
-  border-radius: 50%;
-  box-shadow: 0 0 12px #ff4545;
-}
-
-.live.playing .live-dot {
-  animation: livePulse 1s infinite;
-}
-
-@keyframes livePulse {
-  50% { opacity: .3; transform: scale(.7); }
 }
 
 .player h2 {
@@ -310,15 +290,19 @@ nav a:hover { color: var(--gold); }
 .equalizer.active .bar:nth-child(2n) {
   animation-duration: .48s;
 }
+
 .equalizer.active .bar:nth-child(3n) {
   animation-duration: .85s;
 }
+
 .equalizer.active .bar:nth-child(4n) {
   animation-duration: .58s;
 }
+
 .equalizer.active .bar:nth-child(5n) {
   animation-duration: 1s;
 }
+
 .equalizer.active .bar:nth-child(7n) {
   animation-duration: .4s;
 }
@@ -328,7 +312,7 @@ nav a:hover { color: var(--gold); }
   100% { transform: scaleY(5.5); }
 }
 
-/* LECTEUR */
+/* BOUTON LECTEUR */
 
 .play {
   display: inline-flex;
@@ -380,7 +364,11 @@ audio {
 .contact {
   text-align: center;
   padding: 75px 20px;
-  background: radial-gradient(circle at center,#192d52,#080b18 75%);
+  background: radial-gradient(
+    circle at center,
+    rgba(25,45,82,.75),
+    transparent 75%
+  );
 }
 
 .container {
@@ -419,7 +407,7 @@ audio {
 /* FOOTER */
 
 footer {
-  background: #060913;
+  background: rgba(6,9,19,.94);
   border-top: 1px solid #ffffff15;
   padding: 28px 15px;
   text-align: center;
@@ -453,6 +441,10 @@ footer {
   .player { padding: 30px 19px; }
 
   .player h2 { font-size: 23px; }
+
+  body {
+    background-attachment: scroll;
+  }
 }
 
 @media(max-width:380px) {
@@ -524,7 +516,7 @@ footer {
 
 <section class="hero" id="accueil">
 
-  <div class="hero-label">RADIO WEB • EN DIRECT</div>
+  <div class="hero-label">RADIO WEB</div>
 
   <div class="hero-logo" aria-hidden="true">
     <svg viewBox="0 0 100 100" fill="none"
@@ -542,7 +534,7 @@ footer {
   <h1>AGGLO<span>RADIO</span></h1>
 
   <p>
-    Votre radio, votre musique, votre région !<br>
+    Votre radio, votre musique !<br>
     Retrouvez-nous partout dans le monde.
   </p>
 
@@ -550,11 +542,9 @@ footer {
 
 </section>
 
-<!-- HORLOGE FRANÇAISE -->
+<!-- HORLOGE -->
 
 <section class="clock-section" id="horloge">
-
-  <div class="clock-label">HEURE OFFICIELLE FRANÇAISE</div>
 
   <div class="clock" id="clock" aria-label="Heure française">
     --:--:--
@@ -571,11 +561,6 @@ footer {
 <section class="radio-section" id="direct">
 
   <div class="player">
-
-    <div class="live" id="liveIndicator">
-      <span class="live-dot"></span>
-      EN DIRECT
-    </div>
 
     <h2>VOTRE RADIO EN LIGNE</h2>
 
@@ -666,7 +651,7 @@ footer {
 
   <br>
 
-  Votre radio, votre musique, votre région !
+  Votre radio, votre musique !
 
 </footer>
 
@@ -680,7 +665,6 @@ const buttonIcon = document.getElementById("buttonIcon");
 const buttonText = document.getElementById("buttonText");
 const status = document.getElementById("status");
 const equalizer = document.getElementById("equalizer");
-const liveIndicator = document.getElementById("liveIndicator");
 
 /* HORLOGE FRANÇAISE */
 
@@ -722,7 +706,6 @@ setInterval(updateClock, 1000);
 function updatePlayer(playing) {
 
   equalizer.classList.toggle("active", playing);
-  liveIndicator.classList.toggle("playing", playing);
 
   buttonIcon.textContent = playing ? "Ⅱ" : "▶";
 
