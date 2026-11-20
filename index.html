@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -249,6 +249,35 @@ nav a:hover {
   margin-bottom:25px;
 }
 
+/* INDICATEUR EN DIRECT */
+
+.live-indicator {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#aab5c8;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+
+.live-dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#7b8494;
+}
+
+.live-indicator.playing .live-dot {
+  background:#19df83;
+  box-shadow:0 0 12px #19df83;
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity:.35; }
+}
+
 /* EQUALIZER */
 
 .equalizer {
@@ -285,7 +314,7 @@ nav a:hover {
   100% { transform:scaleY(5.5); }
 }
 
-/* BOUTON RADIO */
+/* COMMANDES DU LECTEUR */
 
 .play {
   display:inline-flex;
@@ -300,7 +329,6 @@ nav a:hover {
   font-size:15px;
   font-weight:900;
   cursor:pointer;
-  text-decoration:none;
   transition:.25s;
   box-shadow:0 8px 28px #168cff40;
 }
@@ -321,12 +349,43 @@ nav a:focus-visible,
   outline-offset:4px;
 }
 
+.play:disabled {
+  opacity:.6;
+  cursor:wait;
+}
+
+.volume-box {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:25px auto 10px;
+  max-width:260px;
+}
+
+.volume-box label {
+  color:var(--muted);
+  font-size:13px;
+}
+
+#volume {
+  width:145px;
+  accent-color:var(--gold);
+  cursor:pointer;
+}
+
 #status {
   color:var(--muted);
   font-size:13px;
   margin-top:19px;
-  min-height:22px;
+  min-height:38px;
   line-height:1.6;
+}
+
+.player-note {
+  color:#8290a5;
+  font-size:12px;
+  margin-top:12px;
 }
 
 /* CONTACT */
@@ -560,6 +619,11 @@ footer {
       Retrouvez AGGLORADIO où que vous soyez.
     </p>
 
+    <div class="live-indicator" id="liveIndicator">
+      <span class="live-dot"></span>
+      <span id="liveText">PRÊT À ÉCOUTER</span>
+    </div>
+
     <!-- EQUALIZER -->
 
     <div class="equalizer" id="equalizer" aria-hidden="true">
@@ -584,28 +648,57 @@ footer {
 
     </div>
 
-    <!-- OUVERTURE DU LECTEUR OFFICIEL -->
+    <!-- LECTEUR AUDIO NATIF -->
 
-    <a
+    <audio
+      id="radioAudio"
+      preload="none"
+      playsinline
+    >
+      <source
+        src="https://s3.free-shoutcast.com:18122/"
+      >
+      Votre navigateur ne prend pas en charge la lecture audio.
+    </audio>
+
+    <!-- BOUTON LECTURE / PAUSE -->
+
+    <button
       class="play"
       id="playButton"
-      href="https://aggloradio.radio12345.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Écouter AGGLORADIO sur sa page officielle"
+      type="button"
+      aria-label="Écouter AGGLORADIO"
     >
+      <span id="playIcon" aria-hidden="true">▶</span>
+      <span id="playText">ÉCOUTER EN DIRECT</span>
+    </button>
 
-      <span aria-hidden="true">▶</span>
-      <span>ÉCOUTER EN DIRECT</span>
+    <!-- VOLUME -->
 
-    </a>
+    <div class="volume-box">
+
+      <label for="volume">VOLUME</label>
+
+      <input
+        type="range"
+        id="volume"
+        min="0"
+        max="1"
+        step="0.05"
+        value="0.8"
+        aria-label="Régler le volume"
+      >
+
+    </div>
+
+    <!-- STATUT -->
 
     <p id="status" aria-live="polite" role="status">
-      Cliquez pour écouter AGGLORADIO gratuitement sur notre page officielle.
+      Cliquez sur ÉCOUTER EN DIRECT pour lancer AGGLORADIO.
     </p>
 
-    <p style="color:#8290a5;font-size:12px;margin-top:12px;">
-      Le lecteur officiel s'ouvrira dans un nouvel onglet.
+    <p class="player-note">
+      Diffusion en direct avec le serveur Free-ShoutCast.
     </p>
 
   </div>
@@ -680,14 +773,183 @@ function updateClock() {
   const now = new Date();
 
   clock.textContent = timeFormatter.format(now);
-
   clockDate.textContent = dateFormatter.format(now);
 
 }
 
 updateClock();
-
 setInterval(updateClock,1000);
+
+
+/* LECTEUR AGGLORADIO */
+
+const audio = document.getElementById("radioAudio");
+const playButton = document.getElementById("playButton");
+const playIcon = document.getElementById("playIcon");
+const playText = document.getElementById("playText");
+const status = document.getElementById("status");
+const equalizer = document.getElementById("equalizer");
+const volume = document.getElementById("volume");
+const liveIndicator = document.getElementById("liveIndicator");
+const liveText = document.getElementById("liveText");
+
+
+/* VOLUME INITIAL */
+
+audio.volume = Number(volume.value);
+
+volume.addEventListener("input",function() {
+  audio.volume = Number(this.value);
+});
+
+
+/* AFFICHAGE DU STATUT */
+
+function setStatus(message) {
+  status.textContent = message;
+}
+
+
+/* LECTURE / PAUSE */
+
+playButton.addEventListener("click",async function() {
+
+  if (!audio.paused) {
+
+    audio.pause();
+
+    return;
+  }
+
+  playButton.disabled = true;
+
+  playText.textContent = "CONNEXION...";
+  playIcon.textContent = "◌";
+
+  setStatus("Connexion au serveur AGGLORADIO...");
+
+  try {
+
+    await audio.play();
+
+  } catch(error) {
+
+    console.error("Erreur de lecture :",error);
+
+    playButton.disabled = false;
+
+    playText.textContent = "RÉESSAYER";
+    playIcon.textContent = "▶";
+
+    setStatus(
+      "Impossible de démarrer la lecture. Vérifiez le serveur, l'adresse du flux et votre connexion Internet."
+    );
+
+    liveText.textContent = "CONNEXION IMPOSSIBLE";
+
+    liveIndicator.classList.remove("playing");
+
+  }
+
+});
+
+
+/* LECTURE CONFIRMEE */
+
+audio.addEventListener("playing",function() {
+
+  playButton.disabled = false;
+
+  playIcon.textContent = "Ⅱ";
+  playText.textContent = "METTRE EN PAUSE";
+
+  equalizer.classList.add("active");
+  liveIndicator.classList.add("playing");
+
+  liveText.textContent = "EN DIRECT";
+
+  setStatus("AGGLORADIO est en cours de diffusion. Bonne écoute !");
+
+});
+
+
+/* MISE EN ATTENTE */
+
+audio.addEventListener("waiting",function() {
+
+  setStatus("Chargement du flux audio...");
+
+});
+
+
+/* CONNEXION EN COURS */
+
+audio.addEventListener("loadstart",function() {
+
+  if (!audio.paused) {
+    setStatus("Connexion au serveur Free-ShoutCast...");
+  }
+
+});
+
+
+/* PAUSE */
+
+audio.addEventListener("pause",function() {
+
+  playButton.disabled = false;
+
+  playIcon.textContent = "▶";
+  playText.textContent = "REPRENDRE L'ÉCOUTE";
+
+  equalizer.classList.remove("active");
+  liveIndicator.classList.remove("playing");
+
+  liveText.textContent = "EN PAUSE";
+
+  setStatus("La lecture est en pause.");
+
+});
+
+
+/* ERREUR DE FLUX */
+
+audio.addEventListener("error",function() {
+
+  playButton.disabled = false;
+
+  playIcon.textContent = "▶";
+  playText.textContent = "RÉESSAYER";
+
+  equalizer.classList.remove("active");
+  liveIndicator.classList.remove("playing");
+
+  liveText.textContent = "ERREUR DE CONNEXION";
+
+  setStatus(
+    "Le flux audio est indisponible. Vérifiez que le serveur est actif et que l'adresse d'écoute est correcte."
+  );
+
+});
+
+
+/* FIN OU INTERRUPTION DU FLUX */
+
+audio.addEventListener("ended",function() {
+
+  playButton.disabled = false;
+
+  playIcon.textContent = "▶";
+  playText.textContent = "ÉCOUTER EN DIRECT";
+
+  equalizer.classList.remove("active");
+  liveIndicator.classList.remove("playing");
+
+  liveText.textContent = "DIFFUSION TERMINÉE";
+
+  setStatus("La diffusion est terminée.");
+
+});
 
 </script>
 
