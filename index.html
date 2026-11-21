@@ -7,7 +7,7 @@
 
 <title>AGGLORADIO - Votre radio en direct</title>
 
-<meta name="description" content="Écoutez AGGLORADIO en direct. Votre radio, votre musique, votre région !">
+<meta name="description" content="Écoutez AGGLORADIO en direct. Votre radio, votre musique !">
 
 <style>
 * {
@@ -18,7 +18,10 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #080d19, #14213d, #090d18);
+    background:
+        linear-gradient(rgba(5, 10, 25, 0.88), rgba(5, 10, 25, 0.92)),
+        url("https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1920")
+        center center / cover fixed no-repeat;
     color: white;
     min-height: 100vh;
     display: flex;
@@ -28,7 +31,7 @@ body {
 header {
     text-align: center;
     padding: 30px 15px;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0,0,0,0.45);
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -61,20 +64,12 @@ main {
 .player {
     width: 100%;
     max-width: 460px;
-    background: rgba(10, 17, 34, 0.92);
-    border: 1px solid rgba(0,170,255,0.35);
+    background: rgba(10, 17, 34, 0.94);
+    border: 1px solid rgba(0,170,255,0.4);
     border-radius: 25px;
     padding: 30px 25px;
     text-align: center;
-    box-shadow: 0 0 35px rgba(0,140,255,0.18);
-}
-
-.studio-image {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 22px;
+    box-shadow: 0 0 35px rgba(0,140,255,0.25);
 }
 
 .radio-icon {
@@ -189,12 +184,21 @@ footer {
     padding: 22px 15px;
     color: #8298b5;
     font-size: 13px;
-    background: rgba(0,0,0,0.3);
-    line-height: 1.8;
+    background: rgba(0,0,0,0.65);
+    line-height: 1.9;
 }
 
 footer strong {
     color: #00baff;
+}
+
+footer a {
+    color: #00baff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 @media(max-width:480px) {
@@ -212,8 +216,8 @@ footer strong {
         font-size: 30px;
     }
 
-    .studio-image {
-        height: 155px;
+    body {
+        background-attachment: scroll;
     }
 }
 </style>
@@ -223,19 +227,12 @@ footer strong {
 
 <header>
     <div class="logo">AGGLO<span>RADIO</span></div>
-    <p>Votre radio, votre musique, votre région !</p>
+    <p>Écoutez AGGLORADIO en direct !</p>
 </header>
 
 <main>
 
 <section class="player">
-
-    <!-- IMAGE STUDIO RADIO -->
-    <img
-        class="studio-image"
-        src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=900"
-        alt="Studio radio moderne"
-    >
 
     <div class="radio-icon">🎙️</div>
 
@@ -249,6 +246,7 @@ footer strong {
     <div class="clock" id="clock">00:00:00</div>
     <div class="date" id="date"></div>
 
+    <!-- EGALISEUR ANIME -->
     <div class="equalizer" id="equalizer">
         <span></span><span></span><span></span>
         <span></span><span></span><span></span>
@@ -257,6 +255,7 @@ footer strong {
         <span></span><span></span><span></span>
     </div>
 
+    <!-- LECTEUR RADIO -->
     <audio id="radio" preload="none">
         <source
             src="https://s3.free-shoutcast.com/stream/18122"
@@ -278,7 +277,14 @@ footer strong {
 
 <footer>
     <strong>AGGLORADIO</strong><br>
-    Votre radio, votre musique, votre région !<br>
+
+    Pour tout contact ou suggestion :<br>
+
+    <a href="mailto:aggloradio@mail.com">
+        aggloradio@mail.com
+    </a>
+
+    <br>
     © <span id="year"></span> AGGLORADIO - Tous droits réservés
 </footer>
 
