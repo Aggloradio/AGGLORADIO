@@ -1,994 +1,321 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
 
-<title>AGGLORADIO | La radio en direct</title>
+<title>AGGLORADIO - Votre radio en direct</title>
 
-<meta name="description" content="AGGLORADIO, votre radio, votre musique. Écoutez-nous en direct partout dans le monde.">
-<meta name="theme-color" content="#080b18">
+<meta name="description" content="Écoutez AGGLORADIO en direct. Votre radio, votre musique, votre région !">
 
 <style>
-:root {
-  --gold:#ffc928;
-  --blue:#168cff;
-  --purple:#9b5cff;
-  --dark:#080b18;
-  --white:#fff;
-  --muted:#aab5c8;
-}
-
 * {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html {
-  scroll-behavior:smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    linear-gradient(rgba(8,11,24,.85),rgba(8,11,24,.92)),
-    url("https://commons.wikimedia.org/wiki/Special:Redirect/file/Radio%20FM%20Recording%20Studio%202026.jpg")
-    center center / cover fixed;
-  color:var(--white);
-  min-height:100vh;
-  overflow-x:hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #080d19, #14213d, #090d18);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-
-/* NAVIGATION */
 
 header {
-  background:rgba(8,11,24,.92);
-  border-bottom:1px solid #ffffff15;
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(15px);
+    text-align: center;
+    padding: 30px 15px;
+    background: rgba(0,0,0,0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.navbar {
-  max-width:1150px;
-  margin:auto;
-  padding:15px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+.logo {
+    font-size: clamp(32px, 7vw, 52px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-shadow: 0 0 20px #008cff;
 }
 
-.brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
+.logo span {
+    color: #00aaff;
 }
 
-.logo-icon {
-  width:49px;
-  height:49px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--blue),var(--purple));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 25px #168cff55;
+header p {
+    margin-top: 10px;
+    color: #b9c9df;
+    font-size: 15px;
 }
 
-.logo-icon svg {
-  width:35px;
-  height:35px;
-}
-
-.brand-name {
-  font-size:23px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:white;
-}
-
-.brand-name span {
-  color:var(--gold);
-}
-
-nav {
-  display:flex;
-  gap:27px;
-}
-
-nav a {
-  text-decoration:none;
-  color:#d5dbea;
-  font-size:14px;
-  transition:.2s;
-}
-
-nav a:hover {
-  color:var(--gold);
-}
-
-/* ACCUEIL */
-
-.hero {
-  text-align:center;
-  padding:75px 20px 45px;
-  background:radial-gradient(
-    ellipse at 50% 10%,
-    rgba(38,59,118,.55),
-    rgba(16,26,56,.35) 55%,
-    transparent 90%
-  );
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-label {
-  display:inline-block;
-  padding:9px 17px;
-  border:1px solid #ffc92860;
-  border-radius:30px;
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:3px;
-  margin-bottom:25px;
-}
-
-.hero-logo {
-  width:95px;
-  height:95px;
-  margin:0 auto 20px;
-  border-radius:27px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#168cff,#8c48ff);
-  box-shadow:0 0 45px #168cff60;
-  animation:logoGlow 3s infinite alternate;
-}
-
-.hero-logo svg {
-  width:70px;
-  height:70px;
-}
-
-@keyframes logoGlow {
-  from { box-shadow:0 0 20px #168cff40; }
-  to { box-shadow:0 0 50px #9b5cff90; }
-}
-
-.hero h1 {
-  font-size:clamp(39px,8vw,76px);
-  font-weight:900;
-  letter-spacing:5px;
-  margin-bottom:15px;
-}
-
-.hero h1 span {
-  color:var(--gold);
-}
-
-.hero p {
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.8;
-}
-
-.hero-line {
-  width:90px;
-  height:4px;
-  background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));
-  border-radius:5px;
-  margin:27px auto 0;
-}
-
-/* HORLOGE */
-
-.clock-section {
-  padding:20px;
-  text-align:center;
-  background:rgba(11,16,33,.65);
-}
-
-.clock {
-  font-size:clamp(35px,7vw,53px);
-  font-weight:900;
-  letter-spacing:5px;
-  font-variant-numeric:tabular-nums;
-  background:linear-gradient(90deg,#168cff,#b18aff,var(--gold));
-  background-clip:text;
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.clock-date {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:8px;
-}
-
-/* LECTEUR RADIO */
-
-.radio-section {
-  padding:45px 18px 85px;
-  background:radial-gradient(
-    ellipse at center,
-    rgba(16,28,56,.65),
-    transparent 75%
-  );
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 15px;
 }
 
 .player {
-  max-width:650px;
-  margin:auto;
-  padding:38px 30px;
-  background:linear-gradient(
-    145deg,
-    rgba(25,40,71,.94),
-    rgba(16,22,41,.96)
-  );
-  border:1px solid #ffffff20;
-  border-radius:27px;
-  box-shadow:0 20px 65px #0009;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+    width: 100%;
+    max-width: 460px;
+    background: rgba(10, 17, 34, 0.92);
+    border: 1px solid rgba(0,170,255,0.35);
+    border-radius: 25px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(0,140,255,0.18);
 }
 
-.player h2 {
-  font-size:27px;
-  margin-bottom:9px;
+.radio-icon {
+    width: 135px;
+    height: 135px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #007bff, #00d4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 65px;
+    box-shadow: 0 0 30px rgba(0,170,255,0.45);
 }
 
-.player-subtitle {
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:25px;
+.player h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
 }
 
-/* INDICATEUR */
+.subtitle {
+    color: #a9bdd7;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
 
-.live-indicator {
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  color:var(--gold);
-  font-size:13px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin-bottom:15px;
+.live {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: rgba(255,0,0,0.12);
+    border: 1px solid rgba(255,50,50,0.4);
+    color: #ff5555;
+    padding: 8px 17px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 25px;
 }
 
 .live-dot {
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#7b8494;
+    width: 9px;
+    height: 9px;
+    background: #ff3030;
+    border-radius: 50%;
+    animation: blink 1s infinite;
 }
 
-.live-indicator.playing .live-dot {
-  background:#19df83;
-  box-shadow:0 0 12px #19df83;
-  animation:pulse 1.2s infinite;
+@keyframes blink {
+    50% { opacity: 0.25; }
 }
 
-@keyframes pulse {
-  50% { opacity:.35; }
+audio {
+    width: 100%;
+    margin: 10px 0 20px;
+    height: 45px;
 }
 
-/* EQUALIZER */
+.play-button {
+    border: none;
+    background: linear-gradient(90deg, #007bff, #00c8ff);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 16px 35px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.play-button:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 25px rgba(0,170,255,0.5);
+}
+
+.status {
+    margin-top: 20px;
+    color: #9fb4ce;
+    font-size: 13px;
+    min-height: 18px;
+}
 
 .equalizer {
-  height:115px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  margin:15px auto 28px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 20px 0;
 }
 
-.bar {
-  width:8px;
-  height:12px;
-  border-radius:8px;
-  background:linear-gradient(to top,#168cff,#9b5cff,#ffc928);
-  box-shadow:0 0 10px #168cff35;
+.equalizer span {
+    width: 5px;
+    height: 12px;
+    border-radius: 5px;
+    background: #00baff;
 }
 
-.equalizer.active .bar {
-  animation:sound .65s ease-in-out infinite alternate;
+.equalizer.active span {
+    animation: equalize 0.7s infinite ease-in-out alternate;
 }
 
-.equalizer.active .bar:nth-child(2n) {
-  animation-duration:.48s;
+.equalizer span:nth-child(2n) {
+    animation-delay: .2s;
 }
 
-.equalizer.active .bar:nth-child(3n) {
-  animation-duration:.85s;
+.equalizer span:nth-child(3n) {
+    animation-delay: .4s;
 }
 
-@keyframes sound {
-  0% { transform:scaleY(.35); }
-  100% { transform:scaleY(5.5); }
+@keyframes equalize {
+    from { height: 8px; }
+    to { height: 40px; }
 }
-
-/* BOUTON LECTURE */
-
-.play {
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  background:linear-gradient(135deg,var(--blue),var(--purple));
-  color:white;
-  border:none;
-  border-radius:50px;
-  padding:17px 30px;
-  font-size:15px;
-  font-weight:900;
-  cursor:pointer;
-  transition:.25s;
-  box-shadow:0 8px 28px #168cff40;
-}
-
-.play:hover {
-  transform:translateY(-3px);
-  box-shadow:0 12px 35px #168cff70;
-}
-
-.play:active {
-  transform:scale(.97);
-}
-
-.play:disabled {
-  opacity:.6;
-  cursor:wait;
-}
-
-.play:focus-visible,
-nav a:focus-visible,
-.contact a:focus-visible {
-  outline:2px solid var(--gold);
-  outline-offset:4px;
-}
-
-/* VOLUME */
-
-.volume-box {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin:25px auto 10px;
-}
-
-.volume-box label {
-  color:var(--muted);
-  font-size:13px;
-}
-
-#volume {
-  width:145px;
-  accent-color:var(--gold);
-  cursor:pointer;
-}
-
-/* STATUT */
-
-#status {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:19px;
-  min-height:40px;
-  line-height:1.6;
-}
-
-/* CONTACT */
-
-.contact {
-  text-align:center;
-  padding:75px 20px;
-  background:radial-gradient(
-    circle at center,
-    rgba(25,45,82,.75),
-    transparent 75%
-  );
-}
-
-.container {
-  max-width:1050px;
-  margin:auto;
-}
-
-.section-title {
-  font-size:30px;
-  margin-bottom:25px;
-}
-
-.section-title span {
-  color:var(--gold);
-}
-
-.contact p {
-  color:var(--muted);
-  margin-bottom:25px;
-}
-
-.contact a {
-  display:inline-block;
-  color:var(--gold);
-  text-decoration:none;
-  font-size:17px;
-  padding:14px 23px;
-  border:1px solid #ffc92870;
-  border-radius:35px;
-  transition:.2s;
-}
-
-.contact a:hover {
-  background:var(--gold);
-  color:#111;
-}
-
-/* FOOTER */
 
 footer {
-  background:rgba(6,9,19,.94);
-  border-top:1px solid #ffffff15;
-  padding:28px 15px;
-  text-align:center;
-  color:#8290a5;
-  font-size:13px;
-  line-height:2;
+    text-align: center;
+    padding: 22px 15px;
+    color: #8298b5;
+    font-size: 13px;
+    background: rgba(0,0,0,0.3);
+    line-height: 1.8;
 }
 
-.footer-brand {
-  color:var(--gold);
-  font-weight:bold;
-  letter-spacing:3px;
-  font-size:17px;
+footer strong {
+    color: #00baff;
 }
 
-/* MOBILE */
+@media(max-width:480px) {
+    .player {
+        padding: 25px 18px;
+    }
 
-@media(max-width:750px) {
-
-  .navbar {
-    flex-direction:column;
-  }
-
-  nav {
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:17px;
-  }
-
-  .hero {
-    padding-top:55px;
-  }
-
-  .player {
-    padding:30px 19px;
-  }
-
-  .player h2 {
-    font-size:23px;
-  }
-
-  body {
-    background-attachment:scroll;
-  }
+    .radio-icon {
+        width: 110px;
+        height: 110px;
+        font-size: 52px;
+    }
 }
-
-@media(max-width:380px) {
-
-  .brand-name {
-    font-size:19px;
-  }
-
-  nav {
-    gap:12px;
-  }
-
-  nav a {
-    font-size:12px;
-  }
-
-  .play {
-    padding:15px 20px;
-    font-size:13px;
-  }
-
-  .equalizer {
-    gap:5px;
-  }
-}
-
-/* ACCESSIBILITE */
-
-@media(prefers-reduced-motion:reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
-
 <header>
-
-  <div class="navbar">
-
-    <a href="#accueil" class="brand" aria-label="AGGLORADIO - Accueil">
-
-      <div class="logo-icon">
-
-        <svg viewBox="0 0 64 64"
-             fill="none"
-             stroke="white"
-             stroke-width="4"
-             stroke-linecap="round">
-
-          <path d="M12 26V38"/>
-          <path d="M22 17V47"/>
-          <path d="M32 8V56"/>
-          <path d="M42 17V47"/>
-          <path d="M52 26V38"/>
-
-        </svg>
-
-      </div>
-
-      <div class="brand-name">AGGLO<span>RADIO</span></div>
-
-    </a>
-
-    <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#direct">Écouter</a>
-      <a href="#horloge">Horloge</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-  </div>
-
+    <div class="logo">AGGLO<span>RADIO</span></div>
+    <p>Votre radio, votre musique, votre région !</p>
 </header>
 
 <main>
 
-<!-- ACCUEIL -->
+<section class="player">
 
-<section class="hero" id="accueil">
+    <div class="radio-icon">🎙️</div>
 
-  <div class="hero-label">RADIO WEB</div>
+    <h1>AGGLORADIO</h1>
 
-  <div class="hero-logo" aria-hidden="true">
-
-    <svg viewBox="0 0 100 100"
-         fill="none"
-         stroke="white"
-         stroke-width="5"
-         stroke-linecap="round">
-
-      <path d="M14 39V61"/>
-      <path d="M29 25V75"/>
-      <path d="M44 12V88"/>
-      <path d="M59 25V75"/>
-      <path d="M74 39V61"/>
-      <path d="M89 44V56"/>
-
-    </svg>
-
-  </div>
-
-  <h1>AGGLO<span>RADIO</span></h1>
-
-  <p>
-    Votre radio, votre musique !<br>
-    Retrouvez-nous partout dans le monde.
-  </p>
-
-  <div class="hero-line"></div>
-
-</section>
-
-<!-- HORLOGE -->
-
-<section class="clock-section" id="horloge">
-
-  <div class="clock" id="clock" aria-label="Heure française">
-    --:--:--
-  </div>
-
-  <div class="clock-date" id="clockDate">
-    Chargement de la date...
-  </div>
-
-</section>
-
-<!-- LECTEUR RADIO -->
-
-<section class="radio-section" id="direct">
-
-  <div class="player">
-
-    <h2>VOTRE RADIO EN LIGNE</h2>
-
-    <p class="player-subtitle">
-      Retrouvez AGGLORADIO où que vous soyez.
+    <p class="subtitle">
+        Écoutez votre radio en direct
     </p>
 
-    <!-- NOM DE LA RADIO -->
-
-    <div class="live-indicator" id="liveIndicator">
-
-      <span class="live-dot"></span>
-
-      <span id="liveText">AGGLORADIO</span>
-
+    <div class="live">
+        <span class="live-dot"></span>
+        EN DIRECT
     </div>
 
-    <!-- EQUALIZER -->
-
-    <div class="equalizer" id="equalizer" aria-hidden="true">
-
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-
+    <div class="equalizer" id="equalizer">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
     </div>
 
-    <!-- LECTEUR AUDIO -->
-
-    <audio
-      id="radioAudio"
-      preload="none"
-      playsinline
-    >
-
-      <source 
-       <!-- src="https://radio.free-shoutcast.com/site/92427"
-       type="audio/mpeg"
-      >
-      Votre navigateur ne prend pas en charge la lecture audio.
-
+    <audio id="radio" preload="none">
+        <source
+            src="https://s3.free-shoutcast.com/stream/18122"
+            type="audio/mpeg">
+        Votre navigateur ne supporte pas la lecture audio.
     </audio>
 
-    <!-- BOUTON PLAY / PAUSE -->
-
-    <button
-      class="play"
-      id="playButton"
-      type="button"
-      aria-label="Écouter AGGLORADIO"
-    >
-
-      <span id="playIcon" aria-hidden="true">▶</span>
-
-      <span id="playText">ÉCOUTER EN DIRECT</span>
-
+    <button class="play-button" id="playButton">
+        ▶ ÉCOUTER AGGLORADIO
     </button>
 
-    <!-- VOLUME -->
-
-    <div class="volume-box">
-
-      <label for="volume">VOLUME</label>
-
-      <input
-        type="range"
-        id="volume"
-        min="0"
-        max="1"
-        step="0.05"
-        value="0.8"
-        aria-label="Régler le volume"
-      >
-
-    </div>
-
-    <!-- MESSAGE DE STATUT -->
-
-    <p id="status" aria-live="polite" role="status">
-      Cliquez sur ÉCOUTER EN DIRECT pour écouter AGGLORADIO.
+    <p class="status" id="status">
+        Prêt à vous faire écouter !
     </p>
-
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section class="contact" id="contact">
-
-  <div class="container">
-
-    <h2 class="section-title">
-      Restons <span>en contact</span>
-    </h2>
-
-    <p>
-      Une question, une suggestion ou une proposition ?
-    </p>
-
-    <a href="mailto:aggloradio@mail.com">
-      ✉ aggloradio@mail.com
-    </a>
-
-  </div>
 
 </section>
 
 </main>
 
-<!-- FOOTER -->
-
 <footer>
-
-  <div class="footer-brand">AGGLORADIO</div>
-
-  © 2026 AGGLORADIO - Tous droits réservés.
-
-  <br>
-
-  Votre radio, votre musique !
-
+    <strong>AGGLORADIO</strong><br>
+    Votre radio, votre musique, votre région !<br>
+    © <span id="year"></span> AGGLORADIO - Tous droits réservés
 </footer>
 
-<!-- JAVASCRIPT -->
-
 <script>
-
-/* HORLOGE FRANÇAISE */
-
-const clock = document.getElementById("clock");
-const clockDate = document.getElementById("clockDate");
-
-const timeFormatter = new Intl.DateTimeFormat("fr-FR",{
-  timeZone:"Europe/Paris",
-  hour:"2-digit",
-  minute:"2-digit",
-  second:"2-digit",
-  hour12:false
-});
-
-const dateFormatter = new Intl.DateTimeFormat("fr-FR",{
-  timeZone:"Europe/Paris",
-  weekday:"long",
-  day:"numeric",
-  month:"long",
-  year:"numeric"
-});
-
-function updateClock() {
-
-  const now = new Date();
-
-  clock.textContent = timeFormatter.format(now);
-
-  clockDate.textContent = dateFormatter.format(now);
-
-}
-
-updateClock();
-
-setInterval(updateClock,1000);
-
-
-/* LECTEUR AGGLORADIO */
-
-const audio = document.getElementById("radioAudio");
-
-const playButton = document.getElementById("playButton");
-
-const playIcon = document.getElementById("playIcon");
-
-const playText = document.getElementById("playText");
-
+const radio = document.getElementById("radio");
+const button = document.getElementById("playButton");
 const status = document.getElementById("status");
-
 const equalizer = document.getElementById("equalizer");
 
-const volume = document.getElementById("volume");
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-const liveIndicator = document.getElementById("liveIndicator");
+button.addEventListener("click", async () => {
 
-const liveText = document.getElementById("liveText");
+    if (radio.paused) {
 
+        status.textContent = "Connexion à AGGLORADIO...";
 
-/* VOLUME INITIAL */
+        try {
+            await radio.play();
+        } catch (error) {
+            status.textContent =
+                "Impossible de démarrer le flux. Réessayez.";
+        }
 
-audio.volume = Number(volume.value);
-
-volume.addEventListener("input",function() {
-
-  audio.volume = Number(this.value);
+    } else {
+        radio.pause();
+    }
 
 });
 
+radio.addEventListener("playing", () => {
+    button.textContent = "⏸ METTRE EN PAUSE";
+    status.textContent = "Vous écoutez AGGLORADIO !";
+    equalizer.classList.add("active");
+});
 
-/* MESSAGES */
-
-function setStatus(message) {
-
-  status.textContent = message;
-
-}
-
-
-/* LECTURE / PAUSE */
-
-playButton.addEventListener("click",async function() {
-
-  if (!audio.paused) {
-
-    audio.pause();
-
-    return;
-
-  }
-
-  playButton.disabled = true;
-
-  playIcon.textContent = "◌";
-
-  playText.textContent = "CONNEXION...";
-
-  setStatus("Connexion à AGGLORADIO...");
-
-  try {
-
-    await audio.play();
-
-  }
-
-  catch(error) {
-
-    console.error("Erreur de lecture :",error);
-
-    playButton.disabled = false;
-
-    playIcon.textContent = "▶";
-
-    playText.textContent = "RÉESSAYER";
-
-    liveText.textContent = "AGGLORADIO";
-
-    setStatus(
-      "Impossible de lire le flux. Vérifiez le serveur et l'adresse exacte du flux audio."
-    );
-
-    liveIndicator.classList.remove("playing");
-
+radio.addEventListener("pause", () => {
+    button.textContent = "▶ ÉCOUTER AGGLORADIO";
+    status.textContent = "Lecture en pause";
     equalizer.classList.remove("active");
-
-  }
-
 });
 
-
-/* LECTURE CONFIRMEE */
-
-audio.addEventListener("playing",function() {
-
-  playButton.disabled = false;
-
-  playIcon.textContent = "Ⅱ";
-
-  playText.textContent = "METTRE EN PAUSE";
-
-  equalizer.classList.add("active");
-
-  liveIndicator.classList.add("playing");
-
-  liveText.textContent = "AGGLORADIO";
-
-  setStatus("Vous écoutez AGGLORADIO. Bonne écoute !");
-
+radio.addEventListener("waiting", () => {
+    status.textContent = "Chargement du flux audio...";
 });
 
-
-/* CHARGEMENT */
-
-audio.addEventListener("waiting",function() {
-
-  setStatus("Chargement du flux audio...");
-
+radio.addEventListener("error", () => {
+    status.textContent =
+        "Flux momentanément indisponible. Réessayez.";
+    equalizer.classList.remove("active");
 });
-
-
-/* PAUSE */
-
-audio.addEventListener("pause",function() {
-
-  playButton.disabled = false;
-
-  playIcon.textContent = "▶";
-
-  playText.textContent = "ÉCOUTER EN DIRECT";
-
-  equalizer.classList.remove("active");
-
-  liveIndicator.classList.remove("playing");
-
-  liveText.textContent = "AGGLORADIO";
-
-  setStatus("Lecture en pause.");
-
-});
-
-
-/* ERREUR */
-
-audio.addEventListener("error",function() {
-
-  playButton.disabled = false;
-
-  playIcon.textContent = "▶";
-
-  playText.textContent = "RÉESSAYER";
-
-  equalizer.classList.remove("active");
-
-  liveIndicator.classList.remove("playing");
-
-  liveText.textContent = "AGGLORADIO";
-
-  setStatus(
-    "Le flux audio est indisponible. Vérifiez l'adresse d'écoute et la connexion du serveur."
-  );
-
-});
-
-
-/* FIN DE DIFFUSION */
-
-audio.addEventListener("ended",function() {
-
-  playButton.disabled = false;
-
-  playIcon.textContent = "▶";
-
-  playText.textContent = "ÉCOUTER EN DIRECT";
-
-  equalizer.classList.remove("active");
-
-  liveIndicator.classList.remove("playing");
-
-  liveText.textContent = "AGGLORADIO";
-
-  setStatus("La diffusion est terminée.");
-
-});
-
 </script>
 
 </body>
