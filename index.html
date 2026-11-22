@@ -7,7 +7,7 @@
 
 <title>AGGLORADIO - Votre radio en direct</title>
 
-<meta name="description" content="Écoutez AGGLORADIO en direct. Votre radio, votre musique !">
+<meta name="description" content="Votre radio, votre musique ! Écoutez AGGLORADIO en direct.">
 
 <style>
 * {
@@ -19,8 +19,8 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background:
-        linear-gradient(rgba(5, 10, 25, 0.88), rgba(5, 10, 25, 0.92)),
-        url("https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1920")
+        linear-gradient(rgba(5, 10, 25, 0.82), rgba(5, 10, 25, 0.90)),
+        url("https://images.unsplash.com/photo-1734383172782-d57707506342?auto=format&fit=crop&fm=jpg&q=85&w=3000")
         center center / cover fixed no-repeat;
     color: white;
     min-height: 100vh;
@@ -179,6 +179,29 @@ audio {
     to { height: 40px; }
 }
 
+/* PARTENAIRE STELLAR MEDIA */
+
+.partner {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    color: #b9c9df;
+    font-size: 14px;
+}
+
+.partner img {
+    display: block;
+    width: 150px;
+    max-width: 80%;
+    height: auto;
+    max-height: 75px;
+    object-fit: contain;
+    margin: 12px auto 0;
+    background: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 footer {
     text-align: center;
     padding: 22px 15px;
@@ -227,7 +250,7 @@ footer a:hover {
 
 <header>
     <div class="logo">AGGLO<span>RADIO</span></div>
-    <p>Écoutez AGGLORADIO en direct !</p>
+    <p>Votre radio, votre musique !</p>
 </header>
 
 <main>
@@ -239,7 +262,7 @@ footer a:hover {
     <h1>AGGLORADIO</h1>
 
     <p class="subtitle">
-        Écoutez votre radio en direct
+        Écoutez votre webradio en direct
     </p>
 
     <!-- HORLOGE ET DATE -->
@@ -267,9 +290,16 @@ footer a:hover {
         ▶ ÉCOUTER AGGLORADIO
     </button>
 
-    <p class="status" id="status">
-        Prêt à vous faire écouter !
-    </p>
+    <p class="status" id="status" aria-live="polite"></p>
+
+    <!-- PARTENAIRE -->
+    <div class="partner">
+        Avec notre partenaire:
+
+        <img
+            src="stellar-media.png"
+            alt="Logo Stellar Media">
+    </div>
 
 </section>
 
@@ -366,3 +396,10 @@ radio.addEventListener("error", () => {
 
 </body>
 </html>
+  
+
+
+
+
+    
+
